@@ -11,7 +11,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/HomeScene.unity
     guid: 4004483113b9b9a43ad99996e5869e15
+  - enabled: 1
+    path: Assets/Scenes/Hint1Scene.unity
+    guid: 9227628096e32c248984cf4d45f6941f
   m_configObjects:
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: c02ccc2d534937d4585c6758ef716ec4, type: 2}
     com.unity.xr.arfoundation.simulation_settings: {fileID: 11400000, guid: 7504dbed261802c478e15ceb74fa343f, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 6e819d1505574cd42852e0d9defa133d, type: 2}
+    com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 6fb8916ef844f35478dbb640a21e765c, type: 2}

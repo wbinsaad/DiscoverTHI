@@ -14,8 +14,22 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Hint1Scene.unity
     guid: 9227628096e32c248984cf4d45f6941f
+  - enabled: 1
+    path: Assets/Scenes/Game1Scene.unity
+    guid: 4686a4fca1d5abf4fb56fc74c6e2c31b
+  - enabled: 1
+    path: Assets/Scenes/Hint2Scene.unity
+    guid: 5cb6e9e866b74554f980b4143d98cb8e
+  - enabled: 1
+    path: Assets/Scenes/Game2Scene.unity
+    guid: 46adb5e57c7de664aa380e8f2977a541
+  - enabled: 1
+    path: Assets/Scenes/Hint3Scene.unity
+    guid: e4c80a5d708fb24439d447b415bb5151
   m_configObjects:
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: c02ccc2d534937d4585c6758ef716ec4, type: 2}
+    com.unity.input.settings: {fileID: 11400000, guid: c8903d1eba7ad044abebc6b851232ca8, type: 2}
+    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 56acbb8ab150b48478e117b9b80fba02, type: 3}
     com.unity.xr.arfoundation.simulation_settings: {fileID: 11400000, guid: 7504dbed261802c478e15ceb74fa343f, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 6e819d1505574cd42852e0d9defa133d, type: 2}
     com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 6fb8916ef844f35478dbb640a21e765c, type: 2}

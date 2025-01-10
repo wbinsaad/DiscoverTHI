@@ -1,12 +1,11 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Hint1Controller : MonoBehaviour
 {
     public GameObject BagObject;
-    public GameObject EnterGamePopup;
+    public GameObject EndGamePopup;
+
+    // private InputActionAsset _touch;
 
     // Start is called before the first frame update
     void Start()
@@ -19,11 +18,11 @@ public class Hint1Controller : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.touchCount > 0)
         {
-            Debug.Log("Mourse Clicked");
+            UnityEngine.Touch touch = Input.GetTouch(0);
 
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Ray ray = Camera.main.ScreenPointToRay(touch.position);
             RaycastHit hit = new RaycastHit();
 
             if (Physics.Raycast(ray, out hit, 100))
@@ -31,7 +30,9 @@ public class Hint1Controller : MonoBehaviour
 
                 if (hit.transform.tag == "YellowBag")
                 {
-                    EnterGamePopup.SetActive(true);
+                    Handheld.Vibrate();
+                    GameManagerController.Instance.UpdateUserProfile(Levels.game1);
+                    EndGamePopup.SetActive(true);
                 }
             }
         }

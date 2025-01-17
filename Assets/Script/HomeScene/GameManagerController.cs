@@ -8,14 +8,11 @@ public class GameManagerController : MonoBehaviour
 {
     public static GameManagerController Instance { get; private set; }
     public static UserProfile UserProfile { get; private set; }
-
     private string path;
-
     public AudioClip BackGroundClip;
-
     public List<AudioClip> PlaySounds { get; set; }
 
-    void Awake()
+    public void Awake()
     {
         if (Instance == null)
         {
@@ -28,20 +25,15 @@ public class GameManagerController : MonoBehaviour
         }
     }
 
-    void Start()
+    public void Start()
     {
         SoundController.Instance.PlaySoundLoop(BackGroundClip);
 
         path = Path.Combine(Application.persistentDataPath, "game.json");
 
-        if (!Permission.HasUserAuthorizedPermission(Permission.ExternalStorageWrite))
-        {
-            Permission.RequestUserPermission(Permission.ExternalStorageWrite);
-        }
+        Permission.RequestUserPermission(Permission.ExternalStorageWrite);
 
         UserProfile = GetCurrentUser();
-        if (UserProfile == null) return;
-
     }
 
     public void UpdateUserProfile(Levels updatedLevel)

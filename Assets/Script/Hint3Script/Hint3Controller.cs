@@ -1,12 +1,11 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Hint3Controller : MonoBehaviour
 {
     public GameObject PrinterObject;
-    public GameObject EndGamePopup;
 
-    // private InputActionAsset _touch;
 
     // Start is called before the first frame update
     void Start()
@@ -33,7 +32,7 @@ public class Hint3Controller : MonoBehaviour
                 {
                     Handheld.Vibrate();
                     GameManagerController.Instance.UpdateUserProfile(Levels.game3);
-                    EndGamePopup.SetActive(true);
+                    SceneManager.LoadScene("Game3Scene");
                 }
             }
         }

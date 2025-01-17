@@ -25,8 +25,6 @@ public class GameManager : MonoBehaviour
         placedPieces++;
         if (placedPieces >= totalPieces)
         {
-            Handheld.Vibrate();
-            GameManagerController.Instance.UpdateUserProfile(Levels.hint2);
             UIManager.Instance.ShowSuccessButton();
         }
     }
@@ -40,5 +38,12 @@ public class GameManager : MonoBehaviour
     public void ChangeScnese(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
+    }
+
+    public void OnSuccessButtonClick()
+    {
+        Handheld.Vibrate();
+        // GameManagerController.Instance.UpdateUserProfile(Levels.hint2);
+        ChangeScnese("Hint2Scene");
     }
 }

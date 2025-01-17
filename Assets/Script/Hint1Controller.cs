@@ -1,9 +1,9 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Hint1Controller : MonoBehaviour
 {
     public GameObject BagObject;
-    public GameObject EndGamePopup;
 
     // private InputActionAsset _touch;
 
@@ -32,7 +32,7 @@ public class Hint1Controller : MonoBehaviour
                 {
                     Handheld.Vibrate();
                     GameManagerController.Instance.UpdateUserProfile(Levels.game1);
-                    EndGamePopup.SetActive(true);
+                    SceneManager.LoadScene("Game1Scene");
                 }
             }
         }

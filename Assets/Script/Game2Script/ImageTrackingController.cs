@@ -9,7 +9,6 @@ using UnityEngine.XR.ARSubsystems;
 
 public class ImageTrackingController : MonoBehaviour
 {
-    public TMP_Text infoBox;
     public GameObject[] ArPrefabs;
     private ARTrackedImageManager trackedImages;
     List<GameObject> ARObjects = new List<GameObject>();
@@ -28,8 +27,6 @@ public class ImageTrackingController : MonoBehaviour
         // Check if a surface is detected
         if (IsSurfaceDetected())
         {
-            infoBox.text = "Surface detected. Tracking objects...\n";
-            outputTracking(); // Continue tracking and updating prefab status
 
             if (CheckWinCondition())
             {
@@ -39,8 +36,6 @@ public class ImageTrackingController : MonoBehaviour
         }
         else
         {
-            infoBox.text = "Please scan a surface to begin.\n";
-
             // Optionally disable tracking logic while waiting for surface detection
             DisableTracking();
         }
@@ -51,36 +46,11 @@ public class ImageTrackingController : MonoBehaviour
         return true; //  planeManager.trackables != null && planeManager.trackables.count > 0;
     }
 
-
     void DisableTracking()
     {
         foreach (var obj in ARObjects)
         {
             obj.SetActive(false); // Hide all prefabs until surface is scanned
-        }
-    }
-
-
-    void outputTracking()
-    {
-
-        infoBox.text = "Tracking Data: \n";
-
-        int i = 0;
-        foreach (var trackedImage in trackedImages.trackables)
-        {
-            infoBox.text += "Image: " + trackedImage.referenceImage.name + " " + trackedImage.trackingState + " position" + trackedImage.transform.position + "\n";
-
-            if (trackedImage.trackingState == TrackingState.Limited)
-            {
-                ARObjects[i].SetActive(false);
-            }
-            if (trackedImage.trackingState == TrackingState.Tracking)
-            {
-                ARObjects[i].SetActive(true);
-            }
-            i++;
-
         }
     }
 
@@ -98,7 +68,6 @@ public class ImageTrackingController : MonoBehaviour
         trackedImages.trackedImagesChanged += OnTrackedImagesChanged;
     }
 
-
     void OnDisable()
     {
         if (trackedImages != null)
@@ -115,7 +84,6 @@ public class ImageTrackingController : MonoBehaviour
         }
         ARObjects.Clear();
     }
-
 
     private void OnTrackedImagesChanged(ARTrackedImagesChangedEventArgs eventArgs)
     {
@@ -156,8 +124,6 @@ public class ImageTrackingController : MonoBehaviour
         var activeObjects = ARObjects.Where(obj => obj.activeSelf).ToList();
         if (activeObjects.Count != 4)
         {
-            infoBox.text += "Error: Not all 4 pieces are active. Active pieces: ";
-            activeObjects.ForEach(x => infoBox.text += x.name + ", ");
             return false; // Ensure exactly 4 pieces are active
         }
 
@@ -176,8 +142,6 @@ public class ImageTrackingController : MonoBehaviour
         var baseObject = activeObjects.FirstOrDefault(obj => obj.name.StartsWith("part1"));
         if (baseObject == null)
         {
-            infoBox.text += "Error: Base piece not found.\n";
-            activeObjects.ForEach(x => infoBox.text += x.name + ", ");
             return false; // Base piece not found
         }
         Vector3 basePosition = baseObject.transform.position;
@@ -191,7 +155,6 @@ public class ImageTrackingController : MonoBehaviour
             string pieceName = obj.name.Substring(0, 5); // Assuming piece name starts with "partX"
             if (!expectedOffsets.ContainsKey(pieceName))
             {
-                infoBox.text += "Error: Unknown piece " + pieceName + ".\n";
                 allAligned = false; // Unknown piece
                 continue;
             }
@@ -204,12 +167,7 @@ public class ImageTrackingController : MonoBehaviour
                 // Mathf.Abs(actualOffset.y - expectedOffset.y) > yThreshold ||
                 Mathf.Abs(actualOffset.z - expectedOffset.z) > positionThreshold)
             {
-                infoBox.text += "Misaligned: " + pieceName + ".\n";
                 allAligned = false; // Misaligned piece
-            }
-            else
-            {
-                infoBox.text += "Aligned: " + pieceName + ".\n";
             }
         }
 

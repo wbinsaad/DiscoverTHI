@@ -1,10 +1,10 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Hint2Controller : MonoBehaviour
 {
     public GameObject StudentCardObject;
-    public GameObject EndGamePopup;
 
     // private InputActionAsset _touch;
 
@@ -34,8 +34,8 @@ public class Hint2Controller : MonoBehaviour
                 if (hit.transform.tag == "StudentCard")
                 {
                     Handheld.Vibrate();
-                    GameManagerController.Instance.UpdateUserProfile(Levels.game2);
-                    EndGamePopup.SetActive(true);
+                    GameManagerController.Instance.UpdateUserProfile(Levels.game1);
+                    SceneManager.LoadScene("Game2Scene");
                 }
             }
         }

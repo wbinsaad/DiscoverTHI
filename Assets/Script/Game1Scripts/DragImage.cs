@@ -39,7 +39,7 @@ public class DragImage : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         if (Vector2.Distance(rectTransform.anchoredPosition, correctPosition) < threshold)
         {
             rectTransform.anchoredPosition = correctPosition; // Set to the correct position
-            GameManager.Instance.CheckGameComplete();
+            Game1Controller.Instance.CheckGameComplete();
             // Puzzle Completion Logic
             correctObject.SetActive(true);
             gameObject.SetActive(false);

@@ -12,45 +12,18 @@ public class ImageTrackingController : MonoBehaviour
     public GameObject[] ArPrefabs;
     private ARTrackedImageManager trackedImages;
     List<GameObject> ARObjects = new List<GameObject>();
-    private ARPlaneManager planeManager;
-    
-
 
     void Start()
     {
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
-        planeManager = FindObjectOfType<ARPlaneManager>();
     }
 
     void Update()
     {
-        // Check if a surface is detected
-        if (IsSurfaceDetected())
+        if (CheckWinCondition())
         {
-
-            if (CheckWinCondition())
-            {
-                Handheld.Vibrate();
-                SceneManager.LoadScene(1);
-            }
-        }
-        else
-        {
-            // Optionally disable tracking logic while waiting for surface detection
-            DisableTracking();
-        }
-    }
-
-    bool IsSurfaceDetected()
-    {
-        return true; //  planeManager.trackables != null && planeManager.trackables.count > 0;
-    }
-
-    void DisableTracking()
-    {
-        foreach (var obj in ARObjects)
-        {
-            obj.SetActive(false); // Hide all prefabs until surface is scanned
+            Handheld.Vibrate();
+            SceneManager.LoadScene("Hint3Scene");
         }
     }
 
@@ -94,7 +67,6 @@ public class ImageTrackingController : MonoBehaviour
             {
                 if (trackedImage.referenceImage.name == arPrefab.name && !ARObjects.Any(arObject => arObject.name.Contains(trackedImage.referenceImage.name)))
                 {
-                    Debug.LogWarning("DETECT");
                     ARObjects.Add(Instantiate(arPrefab, trackedImage.transform));
                 }
             }
@@ -107,7 +79,6 @@ public class ImageTrackingController : MonoBehaviour
             {
                 if (gameObject.name == trackedImage.name)
                 {
-                    Debug.LogWarning("LOST");
                     gameObject.SetActive(trackedImage.trackingState == TrackingState.Tracking);
                 }
             }
@@ -119,15 +90,12 @@ public class ImageTrackingController : MonoBehaviour
         // Thresholds for alignment
         const float positionThreshold = 0.05f; // Allowed deviation (adjust as needed)
 
-
         // Collect active ARObjects
         var activeObjects = ARObjects.Where(obj => obj.activeSelf).ToList();
         if (activeObjects.Count != 4)
         {
             return false; // Ensure exactly 4 pieces are active
         }
-
-        Debug.LogWarning("CHECK");
 
         // Map piece names to their expected offsets
         Dictionary<string, Vector3> expectedOffsets = new Dictionary<string, Vector3>()
@@ -144,6 +112,7 @@ public class ImageTrackingController : MonoBehaviour
         {
             return false; // Base piece not found
         }
+
         Vector3 basePosition = baseObject.transform.position;
 
         // Variable to track if all pieces are aligned correctly
@@ -164,7 +133,6 @@ public class ImageTrackingController : MonoBehaviour
 
             // Compare offsets
             if (Mathf.Abs(actualOffset.x - expectedOffset.x) > positionThreshold ||
-                // Mathf.Abs(actualOffset.y - expectedOffset.y) > yThreshold ||
                 Mathf.Abs(actualOffset.z - expectedOffset.z) > positionThreshold)
             {
                 allAligned = false; // Misaligned piece

@@ -1,10 +1,10 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public class Game1Controller : MonoBehaviour
 {
 
-    public static GameManager Instance { get; private set; }
+    public static Game1Controller Instance { get; private set; }
     public int totalPieces = 4;
     private int placedPieces = 0;
 

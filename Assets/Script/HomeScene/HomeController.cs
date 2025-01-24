@@ -15,83 +15,53 @@ public class HomeController : MonoBehaviour
     public GameObject Game2;
     public GameObject Game3;
 
+    private GameObject[] hints;
+    private GameObject[] games;
+
     // Start is called before the first frame update
     void Start()
     {
+        // Initialize arrays for easier access
+        hints = new GameObject[] { Hint1, Hint2, Hint3 };
+        games = new GameObject[] { Game1, Game2, Game3 };
+
         var userProfile = GameManagerController.Instance.GetCurrentUser();
-        switch (userProfile.Level)
+        UpdateUIBasedOnLevel(userProfile.Level);
+    }
+
+    private void UpdateUIBasedOnLevel(Levels currentLevel)
+    {
+        // Determine which levels are active, locked, or completed
+        for (int i = 0; i < hints.Length; i++)
         {
-            case Levels.hint1:
-                Hint1.GetComponent<Image>().sprite = ActiveButton;
-                Game1.GetComponent<Image>().sprite = LockButton;
-
-                Hint2.GetComponent<Image>().sprite = LockButton;
-                Game2.GetComponent<Image>().sprite = LockButton;
-
-                Hint3.GetComponent<Image>().sprite = LockButton;
-                Game3.GetComponent<Image>().sprite = LockButton;
-                break;
-
-            case Levels.game1:
-                Hint1.GetComponent<Image>().sprite = ActiveButton;
-                Game1.GetComponent<Image>().sprite = ActiveButton;
-
-                Hint2.GetComponent<Image>().sprite = LockButton;
-                Game2.GetComponent<Image>().sprite = LockButton;
-
-                Hint3.GetComponent<Image>().sprite = LockButton;
-                Game3.GetComponent<Image>().sprite = LockButton;
-                break;
-
-            case Levels.hint2:
-                Hint1.GetComponent<Image>().sprite = ActiveButton;
-                Game1.GetComponent<Image>().sprite = ActiveButton;
-
-                Hint2.GetComponent<Image>().sprite = ActiveButton;
-                Game2.GetComponent<Image>().sprite = LockButton;
-
-                Hint3.GetComponent<Image>().sprite = LockButton;
-                Game3.GetComponent<Image>().sprite = LockButton;
-                break;
-
-            case Levels.game2:
-                Hint1.GetComponent<Image>().sprite = ActiveButton;
-                Game1.GetComponent<Image>().sprite = ActiveButton;
-
-                Hint2.GetComponent<Image>().sprite = ActiveButton;
-                Game2.GetComponent<Image>().sprite = ActiveButton;
-
-                Hint3.GetComponent<Image>().sprite = LockButton;
-                Game3.GetComponent<Image>().sprite = LockButton;
-                break;
-
-            case Levels.hint3:
-                Hint1.GetComponent<Image>().sprite = ActiveButton;
-                Game1.GetComponent<Image>().sprite = ActiveButton;
-
-                Hint2.GetComponent<Image>().sprite = ActiveButton;
-                Game2.GetComponent<Image>().sprite = ActiveButton;
-
-                Hint3.GetComponent<Image>().sprite = ActiveButton;
-                Game3.GetComponent<Image>().sprite = LockButton;
-                break;
-
-            case Levels.game3:
-                Hint1.GetComponent<Image>().sprite = ActiveButton;
-                Game1.GetComponent<Image>().sprite = ActiveButton;
-
-                Hint2.GetComponent<Image>().sprite = ActiveButton;
-                Game2.GetComponent<Image>().sprite = ActiveButton;
-
-                Hint3.GetComponent<Image>().sprite = ActiveButton;
-                Game3.GetComponent<Image>().sprite = ActiveButton;
-                break;
+            if ((int)currentLevel > i * 2 + 1) // Finished levels
+            {
+                SetButtonState(hints[i], FinishedButton);
+                SetButtonState(games[i], FinishedButton);
+            }
+            else if ((int)currentLevel == i * 2 + 1) // Active level
+            {
+                SetButtonState(hints[i], ActiveButton);
+                SetButtonState(games[i], LockButton);
+            }
+            else if ((int)currentLevel == i * 2 + 2) // Active game
+            {
+                SetButtonState(hints[i], ActiveButton);
+                SetButtonState(games[i], ActiveButton);
+            }
+            else // Locked levels
+            {
+                SetButtonState(hints[i], LockButton);
+                SetButtonState(games[i], LockButton);
+            }
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void SetButtonState(GameObject buttonObject, Sprite stateSprite)
     {
-
+        if (buttonObject != null)
+        {
+            buttonObject.GetComponent<Image>().sprite = stateSprite;
+        }
     }
 }

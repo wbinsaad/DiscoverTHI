@@ -1415,6 +1415,7 @@ GameObject:
   - component: {fileID: 2125982751}
   - component: {fileID: 2125982750}
   - component: {fileID: 2125982752}
+  - component: {fileID: 2125982753}
   m_Layer: 0
   m_Name: XR Origin
   m_TagString: Untagged
@@ -1468,6 +1469,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StudentCardObject: {fileID: 4240054777210468448, guid: a5bc8ecb5231bdc40954b97a03a55a36, type: 3}
+--- !u!114 &2125982753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2125982749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3f911163e050a942adc6fb14375dd3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HintObject: {fileID: 4240054777210468448, guid: a5bc8ecb5231bdc40954b97a03a55a36, type: 3}
+  NextSceneName: Game2Scene
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

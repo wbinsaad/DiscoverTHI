@@ -1,11 +1,11 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Hint3Controller : MonoBehaviour
+public class HintController : MonoBehaviour
 {
-    public GameObject PrinterObject;
-
+    public GameObject HintObject;
+    public string NextSceneName;
+    public Levels NextLevel;
 
     // Start is called before the first frame update
     void Start()
@@ -13,7 +13,7 @@ public class Hint3Controller : MonoBehaviour
         Vector3 randomOffset = new Vector3(UnityEngine.Random.Range(-8, 8), 0, UnityEngine.Random.Range(-8, 8));
         Vector3 cameraPosition = Camera.main.transform.position;
 
-        Instantiate(PrinterObject, (randomOffset + cameraPosition), Quaternion.identity);
+        Instantiate(HintObject, (randomOffset + cameraPosition), Quaternion.identity);
     }
 
     void Update()
@@ -25,14 +25,14 @@ public class Hint3Controller : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(touch.position);
             RaycastHit hit = new RaycastHit();
 
-
             if (Physics.Raycast(ray, out hit, 100))
             {
-                if (hit.transform.tag == "Printer")
+
+                if (hit.transform.tag == "HintObject")
                 {
                     Handheld.Vibrate();
-                    GameManagerController.Instance.UpdateUserProfile(Levels.game3);
-                    SceneManager.LoadScene("Game3Scene");
+                    GameManagerController.Instance.UpdateUserProfile(NextLevel);
+                    SceneManager.LoadScene(NextSceneName);
                 }
             }
         }

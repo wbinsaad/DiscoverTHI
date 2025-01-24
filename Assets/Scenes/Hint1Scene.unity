@@ -1500,7 +1500,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3f911163e050a942adc6fb14375dd3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BagObject: {fileID: 4240054777210468448, guid: 0dcca67efa8a2d3429b342ce69e0cc7a, type: 3}
+  HintObject: {fileID: 4240054777210468448, guid: 0dcca67efa8a2d3429b342ce69e0cc7a, type: 3}
+  NextSceneName: Game1Scene
+  NextLevel: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

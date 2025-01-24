@@ -69,8 +69,6 @@ public class Game3Controller : MonoBehaviour
             // Check for user input
             if (Input.GetMouseButtonDown(0))
             {
-                Debug.Log("Screen click/tap detected!");
-
                 // Now we call our revised "IsCardOnSameX" method
                 if (IsCardOnSameX(0.05f, 2.0f))  // tweak threshold & distance as needed
                 {
@@ -152,13 +150,6 @@ public class Game3Controller : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Checks if the card is within a certain world X threshold of the printer, 
-    /// ignoring Y and Z differences. Also checks if it's under maxDistance in 3D.
-    /// </summary>
-    /// <param name="xThreshold">How close the X coordinates need to be</param>
-    /// <param name="maxDistance">Max 3D distance allowed between printer and card</param>
-    /// <returns>True if within thresholds, false otherwise</returns>
     private bool IsCardOnSameX(float xThreshold, float maxDistance)
     {
         if (instantiatedPrinter == null || instantiatedStudentCard == null)

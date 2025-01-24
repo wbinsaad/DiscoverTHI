@@ -27,12 +27,6 @@ public class PuzzlePiece : MonoBehaviour
             Touch touch = Input.GetTouch(0);
             
             Vector2 touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
-            // Collider2D hit = Physics2D.OverlapPoint(touchPosition);
-            // Debug.Log($"hit: {hit != null}");
-            // if (hit != null)
-            // {
-            //     Debug.Log($"hit" +"   " + hit.transform.gameObject.name);
-            // }
             
             Ray ray = Camera.main.ScreenPointToRay(touch.position);
             RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.up);
@@ -90,14 +84,11 @@ public class PuzzlePiece : MonoBehaviour
         {
             transform.position = correctPosition;
             isPlaced = true;
-            // Add Vibration Feedback
-            Handheld.Vibrate();
-            GameManager.Instance.CheckGameComplete();
+            Game1Controller.Instance.CheckGameComplete();
         }
         else
         {
             transform.position = originalPosition;
-            // UIManager.Instance.ShowMessage("Incorrect position, please try again");
         }
     }
 }

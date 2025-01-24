@@ -18,7 +18,6 @@ public class HomeController : MonoBehaviour
     private GameObject[] hints;
     private GameObject[] games;
 
-    // Start is called before the first frame update
     void Start()
     {
         // Initialize arrays for easier access

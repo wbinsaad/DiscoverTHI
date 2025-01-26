@@ -10,7 +10,6 @@ public class GameManagerController : MonoBehaviour
     public static UserProfile UserProfile { get; private set; }
     private string path;
     public AudioClip BackGroundClip;
-    public List<AudioClip> PlaySounds { get; set; }
 
     public void Awake()
     {
@@ -40,7 +39,7 @@ public class GameManagerController : MonoBehaviour
     {
         if (File.Exists(path))
         {
-            UserProfile userProfile = new UserProfile("Waleed", updatedLevel);
+            UserProfile userProfile = new UserProfile("User", updatedLevel);
             string userProfileJson = JsonUtility.ToJson(userProfile, true);
             File.WriteAllText(path, userProfileJson);
         }
@@ -56,7 +55,7 @@ public class GameManagerController : MonoBehaviour
         }
         else
         {
-            UserProfile userProfile = new UserProfile("Waleed", Levels.hint1);
+            UserProfile userProfile = new UserProfile("User", Levels.hint1);
             string userProfileJson = JsonUtility.ToJson(userProfile, true);
             File.WriteAllText(path, userProfileJson);
             return userProfile;
